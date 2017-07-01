@@ -63,7 +63,7 @@ export class Router extends RequestDiverter {
                         continue;
                     }
                 }
-               this.logger.success(`Router node '${this.$preRouters}${name}' added`);
+               this.logger.success(`Router node '${this.$preRouters}${name}' added.`);
             }
         }
     }

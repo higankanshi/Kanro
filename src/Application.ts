@@ -11,7 +11,6 @@ import { ConfigBuilder } from "./ConfigBuilder";
 import { KanroModule } from "./KanroModule";
 
 let appLogger = LoggerManager.current.registerLogger("Kanro:App", Colors.magenta);
-let configLogger = LoggerManager.current.registerLogger("Kanro:Config", Colors.green);
 let httpLogger = LoggerManager.current.registerLogger("Kanro:HTTP", Colors.yellow);
 
 class RequestContext {
@@ -268,9 +267,10 @@ export class Application {
             appLogger.info("Booting...");
 
             appLogger.info("Create application context...");
+            await ConfigBuilder.initialize();
+
             if (config == undefined) {
-                configLogger.info("Unspecified configs, searching for configs...");
-                config = await ConfigBuilder.readConfig();
+                config = await ConfigBuilder.readConfig(config);
             }
             this.appConfig = config;
 
@@ -295,8 +295,8 @@ export class Application {
             appLogger.info("Reload configs...");
 
             appLogger.info("Create application context...");
+
             if (config == undefined) {
-                configLogger.info("Unspecified configs, searching for configs...");
                 config = await ConfigBuilder.readConfig();
             }
 
@@ -329,7 +329,7 @@ export class Application {
                     httpLogger.error(`Create http server fail, message: '${err.message}'`);
                     this.die(err, "HTTP");
                 }
-                httpLogger.success(`Http server listening on '${config.port}'`);
+                httpLogger.success(`Http server listening on '${config.port}'.`);
                 res();
             });
             this.httpServer.listen(config.port);

@@ -1,4 +1,5 @@
 {
+    "$schema": "http://higan.me/schema/1.1/kanro.json",
     "port": 80,
     "registry": "http://localhost:4873",
     "resource": "./resource",

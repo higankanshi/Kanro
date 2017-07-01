@@ -57,5 +57,7 @@ export class Logger {
 
             logFunc(log);
         }
+
+        Logger.time = Date.now();
     }
 }

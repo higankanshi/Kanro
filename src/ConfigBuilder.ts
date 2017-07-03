@@ -4,12 +4,12 @@ import { Path, File } from './IO';
 import { InvalidConfigException } from './Exceptions';
 import { IAppConfig } from './IAppConfig';
 import { LoggerManager } from "./LoggerManager";
-import { Colors } from "./Logging";
+import { Colors, AnsiStyle } from "./Logging";
 import { Router } from "./Router";
 
 let projectDir = Path.resolve(__dirname, '..');
 let ajv = Ajv();
-let configLogger = LoggerManager.current.registerLogger("Kanro:Config", Colors.green);
+let configLogger = LoggerManager.current.registerLogger("Config", AnsiStyle.create().foreground(Colors.green));
 
 export class ConfigBuilder {
     static async initialize() {
@@ -40,9 +40,9 @@ export class ConfigBuilder {
         if (await File.exists(`${process.cwd()}/kanro.json`)) {
             return ConfigBuilder.readConfigFromFile(`${process.cwd()}/kanro.json`);
         }
-        else if (await File.exists(`${projectDir}/configs/kanro.json`)) {
+        else if (await File.exists(`${projectDir}/config/kanro.json`)) {
             configLogger.warning("'kanro.json' not found in project dir, default config will be using.");
-            return ConfigBuilder.readConfigFromFile(`${projectDir}/configs/kanro.json`);
+            return ConfigBuilder.readConfigFromFile(`${projectDir}/config/kanro.json`);
         }
         else {
             throw new Error("Kanro config 'kanro.json' not found.");

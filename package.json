@@ -10,7 +10,6 @@
   "author": "higan@live.cn",
   "license": "MIT",
   "devDependencies": {
-    "@types/debug": "^0.0.29",
     "@types/file-type": "^0.0.2",
     "@types/node": "^7.0.5",
     "@types/npm": "^2.0.28",

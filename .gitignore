@@ -41,3 +41,6 @@ jspm_packages
 *.js
 *.js.map
 *.d.ts
+
+# Static resource
+resource

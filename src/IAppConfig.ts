@@ -32,6 +32,10 @@ export interface IAppConfig {
      */
     resource?: string;
 
+    cluster?: boolean;
+
+    rabbitMq?: string;
+
     /**
      * The http request entry point.
      * 
